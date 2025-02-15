@@ -1,6 +1,8 @@
 # web定义
 server:
   port: 8091
+#file:
+#  upload-dir: /tmp/uploads
 spring:
   # 配置mysql数据源
   datasource:

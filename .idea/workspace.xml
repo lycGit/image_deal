@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a004ff3-df64-41f6-8baa-78e0e9c23d91" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/Config/FileStorageConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/FileController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/relay/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/Config/WebSocketConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/WebSocketController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/relay/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/relay/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/relay/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/relay/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,42 +40,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JBLSPRINGBOOTAPP.CB_APP_CONFIG": "true",
-    "JBLSPRINGBOOTAPP.CB_DELETE_FILE": "false",
-    "JBLSPRINGBOOTAPP.CB_FEIGN_CLIENTS": "true",
-    "JBLSPRINGBOOTAPP.CB_GEN_PACKAGE": "true",
-    "JBLSPRINGBOOTAPP.CB_MAPPER_SCAN": "true",
-    "JBLSPRINGBOOTAPP.CB_RESOURCES": "false",
-    "JBLSPRINGBOOTAPP.CB_START": "true",
-    "JBLSPRINGBOOTAPP.TF_DELETE_FILE": "App.java,AppTest.java",
-    "JBLSPRINGBOOTAPP.TF_FEIGN_CLIENTS_PACKAGE": "com.lyc.ai",
-    "JBLSPRINGBOOTAPP.TF_GEN_PACKAGE": "controller,service,mapper,domain.dto,domain.vo",
-    "JBLSPRINGBOOTAPPGEN.APPNAME": "ImageRelayApp",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "c9faca6025a82a82aad411cfeda6a5a5",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JBLSPRINGBOOTAPP.CB_APP_CONFIG&quot;: &quot;true&quot;,
+    &quot;JBLSPRINGBOOTAPP.CB_DELETE_FILE&quot;: &quot;false&quot;,
+    &quot;JBLSPRINGBOOTAPP.CB_FEIGN_CLIENTS&quot;: &quot;true&quot;,
+    &quot;JBLSPRINGBOOTAPP.CB_GEN_PACKAGE&quot;: &quot;true&quot;,
+    &quot;JBLSPRINGBOOTAPP.CB_MAPPER_SCAN&quot;: &quot;true&quot;,
+    &quot;JBLSPRINGBOOTAPP.CB_RESOURCES&quot;: &quot;false&quot;,
+    &quot;JBLSPRINGBOOTAPP.CB_START&quot;: &quot;true&quot;,
+    &quot;JBLSPRINGBOOTAPP.TF_DELETE_FILE&quot;: &quot;App.java,AppTest.java&quot;,
+    &quot;JBLSPRINGBOOTAPP.TF_FEIGN_CLIENTS_PACKAGE&quot;: &quot;com.lyc.ai&quot;,
+    &quot;JBLSPRINGBOOTAPP.TF_GEN_PACKAGE&quot;: &quot;controller,service,mapper,domain.dto,domain.vo&quot;,
+    &quot;JBLSPRINGBOOTAPPGEN.APPNAME&quot;: &quot;ImageRelayApp&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;c9faca6025a82a82aad411cfeda6a5a5&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.lyc.ai.service.impl" />
@@ -113,7 +113,8 @@
       <workItem from="1739117127529" duration="598000" />
       <workItem from="1739124708244" duration="2864000" />
       <workItem from="1739127592136" duration="9160000" />
-      <workItem from="1739468076062" duration="6153000" />
+      <workItem from="1739468076062" duration="9683000" />
+      <workItem from="1739645415484" duration="2624000" />
     </task>
     <servers />
   </component>

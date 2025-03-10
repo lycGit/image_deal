@@ -72,6 +72,12 @@
                 <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
                 <version>${sharding-jdbc.version}</version>
             </dependency>
+            <!-- WebSocket 支持 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-websocket</artifactId>
+                <version>2.7.0</version> <!-- Use the appropriate version -->
+            </dependency>
             <!--json工具包-->
             <dependency>
                 <groupId>com.alibaba</groupId>

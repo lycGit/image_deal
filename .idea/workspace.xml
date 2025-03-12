@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a004ff3-df64-41f6-8baa-78e0e9c23d91" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/Config/WebSocketConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/WebSocketController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/relay/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/relay/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/FileController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,66 +112,11 @@
       <workItem from="1739127592136" duration="9160000" />
       <workItem from="1739468076062" duration="9683000" />
       <workItem from="1739645415484" duration="2624000" />
+      <workItem from="1741629402284" duration="4897000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/FileController.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/FileController.java</url>
-          <line>49</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/FileController.java</url>
-          <line>51</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/FileController.java</url>
-          <line>50</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/FileController.java</url>
-          <line>53</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/FileController.java</url>
-          <line>55</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/FileController.java</url>
-          <line>59</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/FileController.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/FileController.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/FileController.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

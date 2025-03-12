@@ -26,7 +26,11 @@ public class FileController {
     private FileStorageConfig fileStorageConfig;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadFile(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam(value = "description", required = false) String description,
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "tags", required = false) String tags) {
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().body("文件为空！");
         }
@@ -39,7 +43,11 @@ public class FileController {
             // 保存文件
             Files.copy(file.getInputStream(), filePath);
 
-            return ResponseEntity.ok("文件上传成功！文件名：" + fileName);
+            // 处理额外的请求参数
+
+            return ResponseEntity.ok(String.format(
+                "文件上传成功！文件名：%s，描述：%s，分类：%s，标签：%s",
+                fileName, description, category, tags));
         } catch (IOException e) {
             return ResponseEntity.internalServerError().body("文件上传失败：" + e.getMessage());
         }

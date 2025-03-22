@@ -12,6 +12,8 @@ public class WebSocketController {
     @MessageMapping("/chat.send")
     @SendTo("/topic/public")
     public Message sendMessage(Message message) {
+        System.out.println("Received message: " + message);
+        message.setContent("收到的消息：" + message.getContent());
         return message;
     }
 

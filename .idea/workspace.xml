@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a004ff3-df64-41f6-8baa-78e0e9c23d91" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/lyc/ai/pojo/entity/CreateImageInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/FileController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +130,7 @@
       <workItem from="1742142652109" duration="598000" />
       <workItem from="1742662406196" duration="3055000" />
       <workItem from="1742841305733" duration="8391000" />
-      <workItem from="1743360203972" duration="3062000" />
+      <workItem from="1743360203972" duration="5173000" />
     </task>
     <servers />
   </component>

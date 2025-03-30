@@ -65,6 +65,50 @@ public class FileController {
         }
     }
 
+    @PostMapping("/upload2image")
+    public ResponseEntity<?> upload2Image(
+            @RequestParam("file1") MultipartFile file1,
+            @RequestParam("file2") MultipartFile file2,
+            @RequestParam(value = "description", required = false) String description,
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "tags", required = false) String tags,
+            HttpServletRequest request) {
+        if (file1.isEmpty() || file2.isEmpty()) {
+            return ResponseEntity.badRequest().body(new HashMap<String, String>() {{
+                put("error", "文件为空！");
+            }});
+        }
+
+        try {
+            // 生成唯一文件名
+            String fileName1 = UUID.randomUUID() + "_" + file1.getOriginalFilename();
+            Path filePath1 = Paths.get(fileStorageConfig.getUploadDir(), fileName1);
+
+            // 生成唯一文件名
+            String fileName2 = UUID.randomUUID() + "_" + file2.getOriginalFilename();
+            Path filePath2 = Paths.get(fileStorageConfig.getUploadDir(), fileName2);
+
+            // 保存文件
+            Files.copy(file1.getInputStream(), filePath1);
+            // 保存文件
+            Files.copy(file2.getInputStream(), filePath2);
+
+            // 构建图片URL
+            String imageUrl = String.format("%s://%s:%d/api/files/download/%s",
+                    request.getScheme(),
+                    request.getServerName(),
+                    request.getServerPort(),
+                    fileName1);
+
+            // 返回 JSON 格式的响应
+            return ResponseEntity.ok(new FileUploadResponse(fileName1, description, category, tags, imageUrl));
+        } catch (IOException e) {
+            return ResponseEntity.internalServerError().body(new HashMap<String, String>() {{
+                put("error", "文件上传失败：" + e.getMessage());
+            }});
+        }
+    }
+
     @GetMapping("/download/{fileName}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
         try {

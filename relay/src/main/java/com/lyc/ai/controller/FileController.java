@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.util.UUID;
 import java.util.HashMap;
 import com.lyc.ai.dto.FileUploadResponse;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/files")
@@ -32,7 +33,8 @@ public class FileController {
             @RequestParam("file") MultipartFile file,
             @RequestParam(value = "description", required = false) String description,
             @RequestParam(value = "category", required = false) String category,
-            @RequestParam(value = "tags", required = false) String tags) {
+            @RequestParam(value = "tags", required = false) String tags,
+            HttpServletRequest request) {
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().body(new HashMap<String, String>() {{
                 put("error", "文件为空！");
@@ -47,8 +49,15 @@ public class FileController {
             // 保存文件
             Files.copy(file.getInputStream(), filePath);
 
+            // 构建图片URL
+            String imageUrl = String.format("%s://%s:%d/api/files/download/%s",
+                    request.getScheme(),
+                    request.getServerName(),
+                    request.getServerPort(),
+                    fileName);
+
             // 返回 JSON 格式的响应
-            return ResponseEntity.ok(new FileUploadResponse(fileName, description, category, tags));
+            return ResponseEntity.ok(new FileUploadResponse(fileName, description, category, tags, imageUrl));
         } catch (IOException e) {
             return ResponseEntity.internalServerError().body(new HashMap<String, String>() {{
                 put("error", "文件上传失败：" + e.getMessage());

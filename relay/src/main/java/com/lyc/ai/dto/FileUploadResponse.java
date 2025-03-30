@@ -6,13 +6,24 @@ public class FileUploadResponse {
     private String category;
     private String tags;
     private String message;
+    private String imageUrl;  // 新增字段
 
-    public FileUploadResponse(String fileName, String description, String category, String tags) {
+    public FileUploadResponse(String fileName, String description, String category, String tags, String imageUrl) {
         this.fileName = fileName;
         this.description = description;
         this.category = category;
         this.tags = tags;
         this.message = "文件上传成功";
+        this.imageUrl = imageUrl;
+    }
+
+    // 添加 imageUrl 的 getter 和 setter
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     // Getters and Setters

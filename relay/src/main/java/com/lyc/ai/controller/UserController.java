@@ -1,5 +1,6 @@
 package com.lyc.ai.controller;
 
+import com.lyc.ai.pojo.entity.CreateImageInfo;
 import com.lyc.ai.pojo.entity.UserInfo;
 import com.lyc.ai.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,21 @@ public class UserController {
     @GetMapping("/user/{userName}")
     public UserInfo findByUserName(@PathVariable("userName") String name) {
        return userService.findByName(name);
+    }
+
+    @GetMapping("/createImage/{imageText}")
+    public CreateImageInfo createByImageText(@PathVariable("imageText") String imageText) {
+        CreateImageInfo info = new CreateImageInfo();
+        info.imageUrl = "http://localhost:8091/api/files/download/901a1056-3766-4af3-a3d5-978f0340b8d6_test_header_image.jpg";
+        info.description = "收到的文生图描述文字：" + imageText;
+        return info;
+    }
+
+    @GetMapping("/klImage/{imageText}")
+    public CreateImageInfo createByKLImageText(@PathVariable("imageText") String imageText) {
+        CreateImageInfo info = new CreateImageInfo();
+        info.imageUrl = "http://localhost:8091/api/files/download/e9d4b8d8-3a2e-4367-a51b-f17772edc9d2_output1.png";
+        info.description = "收到的文生图描述文字：" + imageText;
+        return info;
     }
 }

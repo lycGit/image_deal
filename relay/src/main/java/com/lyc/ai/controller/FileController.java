@@ -17,6 +17,8 @@ import java.nio.file.Paths;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.UUID;
+import java.util.HashMap;
+import com.lyc.ai.dto.FileUploadResponse;
 
 @RestController
 @RequestMapping("/api/files")
@@ -26,13 +28,15 @@ public class FileController {
     private FileStorageConfig fileStorageConfig;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(
+    public ResponseEntity<?> uploadFile(
             @RequestParam("file") MultipartFile file,
             @RequestParam(value = "description", required = false) String description,
             @RequestParam(value = "category", required = false) String category,
             @RequestParam(value = "tags", required = false) String tags) {
         if (file.isEmpty()) {
-            return ResponseEntity.badRequest().body("文件为空！");
+            return ResponseEntity.badRequest().body(new HashMap<String, String>() {{
+                put("error", "文件为空！");
+            }});
         }
 
         try {
@@ -43,13 +47,12 @@ public class FileController {
             // 保存文件
             Files.copy(file.getInputStream(), filePath);
 
-            // 处理额外的请求参数
-
-            return ResponseEntity.ok(String.format(
-                "文件上传成功！文件名：%s，描述：%s，分类：%s，标签：%s",
-                fileName, description, category, tags));
+            // 返回 JSON 格式的响应
+            return ResponseEntity.ok(new FileUploadResponse(fileName, description, category, tags));
         } catch (IOException e) {
-            return ResponseEntity.internalServerError().body("文件上传失败：" + e.getMessage());
+            return ResponseEntity.internalServerError().body(new HashMap<String, String>() {{
+                put("error", "文件上传失败：" + e.getMessage());
+            }});
         }
     }
 

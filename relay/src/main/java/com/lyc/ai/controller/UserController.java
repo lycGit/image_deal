@@ -1,8 +1,10 @@
 package com.lyc.ai.controller;
 
+import com.lyc.ai.ImageRelayApp;
 import com.lyc.ai.pojo.entity.CreateImageInfo;
 import com.lyc.ai.pojo.entity.UserInfo;
 import com.lyc.ai.service.UserService;
+import javax.websocket.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -71,7 +71,11 @@ public class WebSocketServer {
                 Iterator<String> keys = receivedJson.keys();
                 while (keys.hasNext()) {
                     String key = keys.next();
-                    jsonObject.put(key, receivedJson.get(key));
+                    if (key.equals("msg")  && receivedJson.get(key).equals("ping")) {
+                        jsonObject.put(key, "pong");
+                    } else {
+                        jsonObject.put(key, receivedJson.get(key));
+                    }
                 }
                 String targetUserId = (String)receivedJson.get("targetUserId");
                 // 4. 添加额外的userId字段

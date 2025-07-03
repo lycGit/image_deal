@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ServerEndpoint(value="/webSocket/{userId}")
-@Component
 public class WebSocketServer {
     // 新增静态缓存集合，用于存储在线用户
     private static ConcurrentHashMap<String, WebSocketServer> onlineUsers = new ConcurrentHashMap<>();

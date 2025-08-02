@@ -55,7 +55,7 @@ public class WebSocketServer {
     public void onMessage(String msg) throws InterruptedException {
         System.out.println("从客服端接受的消息： "+msg);
 
-        if (StringUtil.isNotEmpty(msg)) {
+         if (StringUtil.isNotEmpty(msg)) {
             try {
                 // 1. 将传入的msg字符串解析为JSONObject
                 JSONObject receivedJson = new JSONObject(msg);

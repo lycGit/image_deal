@@ -57,7 +57,7 @@ public class FileController {
                     fileName);
 
             // 返回 JSON 格式的响应
-            return ResponseEntity.ok(new FileUploadResponse(fileName, description, category, tags, imageUrl));
+            return ResponseEntity.ok(new FileUploadResponse(fileName, description, category, tags, imageUrl, ""));
         } catch (IOException e) {
             return ResponseEntity.internalServerError().body(new HashMap<String, String>() {{
                 put("error", "文件上传失败：" + e.getMessage());
@@ -88,20 +88,26 @@ public class FileController {
             String fileName2 = UUID.randomUUID() + "_" + file2.getOriginalFilename();
             Path filePath2 = Paths.get(fileStorageConfig.getUploadDir(), fileName2);
 
+            // 如果执行到这一步报错，那么是路径不存在，因为filePath1在线上环境是Linux路径，本地运行需要切换为mac的路径
             // 保存文件
             Files.copy(file1.getInputStream(), filePath1);
             // 保存文件
             Files.copy(file2.getInputStream(), filePath2);
 
             // 构建图片URL
-            String imageUrl = String.format("%s://%s:%d/api/files/download/%s",
+            String imageUrl1 = String.format("%s://%s:%d/api/files/download/%s",
                     request.getScheme(),
                     request.getServerName(),
                     request.getServerPort(),
                     fileName1);
+            String imageUrl2 = String.format("%s://%s:%d/api/files/download/%s",
+                    request.getScheme(),
+                    request.getServerName(),
+                    request.getServerPort(),
+                    fileName2);
 
             // 返回 JSON 格式的响应
-            return ResponseEntity.ok(new FileUploadResponse(fileName1, description, category, tags, imageUrl));
+            return ResponseEntity.ok(new FileUploadResponse(fileName1, description, category, tags, imageUrl1,imageUrl2));
         } catch (IOException e) {
             return ResponseEntity.internalServerError().body(new HashMap<String, String>() {{
                 put("error", "文件上传失败：" + e.getMessage());

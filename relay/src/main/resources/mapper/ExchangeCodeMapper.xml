@@ -1,0 +1,61 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyc.ai.mapper.ExchangeCodeMapper">
+    <!-- 批量插入兑换码 -->
+    <insert id="batchInsertExchangeCodes" parameterType="java.util.List">
+        INSERT INTO exchange_code (code, batch, total_points, remaining_points, status, create_time)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.code}, #{item.batch}, #{item.totalPoints}, #{item.remainingPoints}, #{item.status}, #{item.createTime})
+        </foreach>
+    </insert>
+    
+    <!-- 根据兑换码获取信息 -->
+    <select id="getExchangeCodeByCode" parameterType="String" resultType="com.lyc.ai.pojo.entity.ExchangeCode">
+        SELECT id, code, batch, total_points AS totalPoints, remaining_points AS remainingPoints, 
+               status, create_time AS createTime, obtained_time AS obtainedTime
+        FROM exchange_code
+        WHERE code = #{code}
+    </select>
+    
+    <!-- 标记兑换码为已获取 -->
+    <update id="markCodeAsObtained" parameterType="String">
+        UPDATE exchange_code
+        SET status = 1, obtained_time = NOW()
+        WHERE code = #{code} AND status = 0
+    </update>
+    
+    <!-- 更新兑换码剩余积分 -->
+    <update id="updateRemainingPoints" parameterType="map">
+        UPDATE exchange_code
+        SET remaining_points = #{newPoints},
+            status = CASE WHEN #{newPoints} = 0 THEN 2 ELSE status END
+        WHERE code = #{code}
+    </update>
+    
+    <!-- 获取某一批次的所有兑换码 -->
+    <select id="getExchangeCodesByBatch" parameterType="String" resultType="com.lyc.ai.pojo.entity.ExchangeCode">
+        SELECT id, code, batch, total_points AS totalPoints, remaining_points AS remainingPoints, 
+               status, create_time AS createTime, obtained_time AS obtainedTime
+        FROM exchange_code
+        WHERE batch = #{batch}
+        ORDER BY create_time DESC
+    </select>
+    
+    <!-- 获取所有未获取的兑换码 -->
+    <select id="getUnobtainedExchangeCodes" resultType="com.lyc.ai.pojo.entity.ExchangeCode">
+        SELECT id, code, batch, total_points AS totalPoints, remaining_points AS remainingPoints, 
+               status, create_time AS createTime, obtained_time AS obtainedTime
+        FROM exchange_code
+        WHERE status = 0
+        ORDER BY create_time ASC
+    </select>
+    
+    <!-- 获取所有已获取但未使用完的兑换码 -->
+    <select id="getObtainedButNotUsedUpExchangeCodes" resultType="com.lyc.ai.pojo.entity.ExchangeCode">
+        SELECT id, code, batch, total_points AS totalPoints, remaining_points AS remainingPoints, 
+               status, create_time AS createTime, obtained_time AS obtainedTime
+        FROM exchange_code
+        WHERE status = 1 AND remaining_points > 0
+        ORDER BY obtained_time DESC
+    </select>
+</mapper>

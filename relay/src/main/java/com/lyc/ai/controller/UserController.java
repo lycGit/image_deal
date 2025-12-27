@@ -72,7 +72,7 @@ public class UserController {
             result.put("message", "鉴权成功，欢迎访问");
         } else {
             result.put("success", false);
-            result.put("message", "口令码错误，拒绝访问");
+            result.put("message", "兑换码错误，拒绝访问");
         }
         return result;
     }

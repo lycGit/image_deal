@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Service("authService")
 public class AuthServiceImpl implements AuthService {
-    // 预设的8位口令码
+    // 预设的8位兑换码
     private static final String VALID_PASSWORD = "12345678";
 
     @Autowired

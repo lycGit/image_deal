@@ -10,7 +10,7 @@ spring:
       username: root
       password: lyc123##
       url: jdbc:mysql://localhost:3306/image_deal?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
       # 初始化时建立物理连接的个数。初始化发生在显示调用 init 方法，或者第一次 getConnection 时
       initialSize: 6
       # 最小连接池数量

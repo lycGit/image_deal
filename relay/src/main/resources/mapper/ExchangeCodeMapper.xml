@@ -50,6 +50,16 @@
         ORDER BY create_time ASC
     </select>
     
+    <!-- 获取指定批次的未获取兑换码 -->
+    <select id="getUnobtainedExchangeCodesByBatch" parameterType="java.lang.String" resultType="com.lyc.ai.pojo.entity.ExchangeCode">
+        SELECT id, code, batch, total_points AS totalPoints, remaining_points AS remainingPoints, 
+               status, create_time AS createTime, obtained_time AS obtainedTime, valid_days AS validDays
+        FROM exchange_code
+        WHERE status = 0 AND batch = #{batch}
+        ORDER BY id ASC
+        LIMIT 1
+    </select>
+    
     <!-- 获取所有已获取但未使用完的兑换码 -->
     <select id="getObtainedButNotUsedUpExchangeCodes" resultType="com.lyc.ai.pojo.entity.ExchangeCode">
         SELECT id, code, batch, total_points AS totalPoints, remaining_points AS remainingPoints, 

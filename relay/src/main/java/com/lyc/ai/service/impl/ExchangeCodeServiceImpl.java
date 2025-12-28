@@ -79,6 +79,29 @@ public class ExchangeCodeServiceImpl implements ExchangeCodeService {
 
     @Transactional
     @Override
+    public ExchangeCode getExchangeCodeByBatch(String batch) {
+        // 获取指定批次的未获取兑换码
+        List<ExchangeCode> unobtainedCodes = exchangeCodeMapper.getUnobtainedExchangeCodesByBatch(batch);
+        
+        if (unobtainedCodes.isEmpty()) {
+            return null;
+        }
+        
+        // 获取第一个未获取的兑换码
+        ExchangeCode exchangeCode = unobtainedCodes.get(0);
+        
+        // 标记为已获取
+        exchangeCodeMapper.markCodeAsObtained(exchangeCode.getCode());
+        
+        // 更新内存中的对象状态
+        exchangeCode.setStatus(1); // 1: 已获取
+        exchangeCode.setObtainedTime(new Date());
+        
+        return exchangeCode;
+    }
+
+    @Transactional
+    @Override
     public Map<String, Object> consumePoints(String code, int points) {
         Map<String, Object> result = new HashMap<>();
         

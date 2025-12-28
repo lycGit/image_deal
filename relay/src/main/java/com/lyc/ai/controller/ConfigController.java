@@ -103,7 +103,7 @@ public class ConfigController {
      * @param key 配置键
      * @return 操作结果
      */
-    @DeleteMapping("/delete/{key}")
+    @PostMapping("/delete/{key}")
     public ResponseEntity<Map<String, Object>> deleteConfig(@PathVariable String key) {
         try {
             if (key == null || key.isEmpty()) {

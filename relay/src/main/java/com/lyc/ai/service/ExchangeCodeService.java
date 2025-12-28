@@ -22,6 +22,13 @@ public interface ExchangeCodeService {
     ExchangeCode getExchangeCode();
     
     /**
+     * 获取一个指定批次的未使用兑换码
+     * @param batch 批次号
+     * @return 兑换码信息
+     */
+    ExchangeCode getExchangeCodeByBatch(String batch);
+    
+    /**
      * 消费兑换码积分
      * @param code 兑换码
      * @param points 要消费的积分数

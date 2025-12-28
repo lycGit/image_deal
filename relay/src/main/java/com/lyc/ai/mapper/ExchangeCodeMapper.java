@@ -24,6 +24,9 @@ public interface ExchangeCodeMapper {
     // 获取所有未获取的兑换码
     List<ExchangeCode> getUnobtainedExchangeCodes();
     
+    // 获取指定批次的未获取兑换码
+    List<ExchangeCode> getUnobtainedExchangeCodesByBatch(String batch);
+    
     // 获取所有已获取但未使用完的兑换码
     List<ExchangeCode> getObtainedButNotUsedUpExchangeCodes();
 }

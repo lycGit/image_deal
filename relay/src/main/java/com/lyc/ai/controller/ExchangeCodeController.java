@@ -48,19 +48,33 @@ public class ExchangeCodeController {
     }
 
     /**
-     * 获取一个未使用的兑换码
+     * 获取一个未使用的兑换码，可以指定批次
+     * @param batch 批次号（可选）
      * @return 兑换码信息
      */
-    @GetMapping("/get")
-    public ResponseEntity<?> getExchangeCode() {
+    @GetMapping({"/get", "/get/{batch}"})
+    public ResponseEntity<?> getExchangeCode(@PathVariable(required = false) String batch) {
         try {
-            ExchangeCode exchangeCode = exchangeCodeService.getExchangeCode();
+            ExchangeCode exchangeCode;
             
-            if (exchangeCode == null) {
-                Map<String, Object> errorBody = new HashMap<>();
-                errorBody.put("success", false);
-                errorBody.put("message", "没有可用的兑换码");
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
+            if (batch != null && !batch.isEmpty()) {
+                // 获取指定批次的未使用兑换码
+                exchangeCode = exchangeCodeService.getExchangeCodeByBatch(batch);
+                if (exchangeCode == null) {
+                    Map<String, Object> errorBody = new HashMap<>();
+                    errorBody.put("success", false);
+                    errorBody.put("message", "该批次没有可用的兑换码");
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
+                }
+            } else {
+                // 获取任意未使用的兑换码
+                exchangeCode = exchangeCodeService.getExchangeCode();
+                if (exchangeCode == null) {
+                    Map<String, Object> errorBody = new HashMap<>();
+                    errorBody.put("success", false);
+                    errorBody.put("message", "没有可用的兑换码");
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
+                }
             }
             
             return ResponseEntity.ok(exchangeCode);

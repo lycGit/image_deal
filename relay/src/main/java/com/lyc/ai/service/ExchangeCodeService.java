@@ -10,9 +10,10 @@ public interface ExchangeCodeService {
      * 批量生成兑换码
      * @param count 兑换码数量
      * @param points 每个兑换码对应的积分数
+     * @param validDays 有效期（天）
      * @return 包含批次信息和生成的兑换码列表
      */
-    Map<String, Object> batchGenerateCodes(int count, int points);
+    Map<String, Object> batchGenerateCodes(int count, int points, int validDays);
     
     /**
      * 获取一个未使用的兑换码

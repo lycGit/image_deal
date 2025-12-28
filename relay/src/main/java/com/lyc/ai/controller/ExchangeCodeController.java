@@ -20,7 +20,7 @@ public class ExchangeCodeController {
 
     /**
      * 批量生成兑换码
-     * @param params 包含count(数量)和points(积分)参数
+     * @param params 包含count(数量)、points(积分)和validDays(有效期)参数
      * @return 生成结果
      */
     @PostMapping("/generate")
@@ -28,6 +28,7 @@ public class ExchangeCodeController {
         try {
             int count = params.get("count");
             int points = params.get("points");
+            int validDays = params.getOrDefault("validDays", 7); // 默认有效期为7天
             
             if (count <= 0 || points <= 0) {
                 Map<String, Object> errorBody = new HashMap<>();
@@ -36,7 +37,7 @@ public class ExchangeCodeController {
                 return ResponseEntity.badRequest().body(errorBody);
             }
             
-            Map<String, Object> result = exchangeCodeService.batchGenerateCodes(count, points);
+            Map<String, Object> result = exchangeCodeService.batchGenerateCodes(count, points, validDays);
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             Map<String, Object> errorBody = new HashMap<>();

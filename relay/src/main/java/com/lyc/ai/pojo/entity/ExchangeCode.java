@@ -11,6 +11,7 @@ public class ExchangeCode {
     private int status; // 0: 未获取, 1: 已获取, 2: 已使用
     private Date createTime;
     private Date obtainedTime;
+    private int validDays; // 有效期（天）
 
     // Getters and Setters
     public Long getId() {
@@ -75,5 +76,13 @@ public class ExchangeCode {
 
     public void setObtainedTime(Date obtainedTime) {
         this.obtainedTime = obtainedTime;
+    }
+
+    public int getValidDays() {
+        return validDays;
+    }
+
+    public void setValidDays(int validDays) {
+        this.validDays = validDays;
     }
 }

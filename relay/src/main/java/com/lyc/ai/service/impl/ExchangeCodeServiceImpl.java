@@ -19,7 +19,7 @@ public class ExchangeCodeServiceImpl implements ExchangeCodeService {
 
     @Transactional
     @Override
-    public Map<String, Object> batchGenerateCodes(int count, int points) {
+    public Map<String, Object> batchGenerateCodes(int count, int points, int validDays) {
         // 生成唯一批次号
         String batch = UUID.randomUUID().toString().substring(0, 8);
         
@@ -35,6 +35,7 @@ public class ExchangeCodeServiceImpl implements ExchangeCodeService {
             exchangeCode.setRemainingPoints(points);
             exchangeCode.setStatus(0); // 0: 未获取
             exchangeCode.setCreateTime(new Date());
+            exchangeCode.setValidDays(validDays); // 设置有效期
             return exchangeCode;
         }).collect(Collectors.toList());
         
@@ -46,6 +47,7 @@ public class ExchangeCodeServiceImpl implements ExchangeCodeService {
         result.put("batch", batch);
         result.put("count", count);
         result.put("pointsPerCode", points);
+        result.put("validDays", validDays);
         result.put("codes", codeSet);
         result.put("createTime", new Date());
         
@@ -127,7 +129,8 @@ public class ExchangeCodeServiceImpl implements ExchangeCodeService {
 
     @Override
     public ExchangeCode getExchangeCodeInfo(String code) {
-        return exchangeCodeMapper.getExchangeCodeByCode(code);
+        ExchangeCode exchangeCode = exchangeCodeMapper.getExchangeCodeByCode(code);
+        return exchangeCode;
     }
 
     @Override

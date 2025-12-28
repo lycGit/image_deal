@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="2a004ff3-df64-41f6-8baa-78e0e9c23d91" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/ExchangeCodeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/controller/ExchangeCodeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/pojo/entity/ExchangeCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/pojo/entity/ExchangeCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/service/ExchangeCodeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/service/ExchangeCodeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/service/impl/ExchangeCodeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/relay/src/main/java/com/lyc/ai/service/impl/ExchangeCodeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/relay/src/main/resources/mapper/ExchangeCodeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/relay/src/main/resources/mapper/ExchangeCodeMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +148,7 @@
       <workItem from="1762566926639" duration="1642000" />
       <workItem from="1765591687353" duration="580000" />
       <workItem from="1766205651848" duration="649000" />
-      <workItem from="1766511093606" duration="11991000" />
+      <workItem from="1766511093606" duration="13685000" />
     </task>
     <servers />
   </component>

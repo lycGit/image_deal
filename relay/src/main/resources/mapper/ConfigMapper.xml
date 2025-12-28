@@ -1,0 +1,32 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyc.ai.mapper.ConfigMapper">
+    <!-- 设置配置（如果存在则更新，不存在则插入） -->
+    <insert id="setConfig" parameterType="map">
+        INSERT INTO config (`key`, `value`, description, create_time, update_time)
+        VALUES (#{key}, #{value}, #{description}, NOW(), NOW())
+        ON DUPLICATE KEY UPDATE
+            `value` = #{value},
+            description = #{description},
+            update_time = NOW()
+    </insert>
+    
+    <!-- 获取所有配置 -->
+    <select id="getAllConfigs" resultType="com.lyc.ai.pojo.entity.Config">
+        SELECT id, `key`, `value`, description, create_time AS createTime, update_time AS updateTime
+        FROM config
+        ORDER BY id ASC
+    </select>
+    
+    <!-- 根据键获取配置 -->
+    <select id="getConfigByKey" parameterType="String" resultType="com.lyc.ai.pojo.entity.Config">
+        SELECT id, `key`, `value`, description, create_time AS createTime, update_time AS updateTime
+        FROM config
+        WHERE `key` = #{key}
+    </select>
+    
+    <!-- 删除配置 -->
+    <delete id="deleteConfig" parameterType="String">
+        DELETE FROM config
+        WHERE `key` = #{key}
+    </delete>
+</mapper>

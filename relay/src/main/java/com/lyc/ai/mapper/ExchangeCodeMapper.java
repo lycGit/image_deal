@@ -29,4 +29,10 @@ public interface ExchangeCodeMapper {
     
     // 获取所有已获取但未使用完的兑换码
     List<ExchangeCode> getObtainedButNotUsedUpExchangeCodes();
+    
+    // 删除指定批次的所有兑换码
+    int deleteExchangeCodesByBatch(String batch);
+    
+    // 获取所有批次
+    List<String> getAllBatches();
 }

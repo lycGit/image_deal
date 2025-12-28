@@ -163,4 +163,49 @@ public class ExchangeCodeController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorBody);
         }
     }
+    
+    /**
+     * 删除指定批次的所有兑换码
+     * @param batch 批次号
+     * @return 删除结果
+     */
+    @PostMapping("/delete/batch/{batch}")
+    public ResponseEntity<?> deleteExchangeCodesByBatch(@PathVariable String batch) {
+        try {
+            Map<String, Object> result = exchangeCodeService.deleteExchangeCodesByBatch(batch);
+            
+            if ((boolean) result.get("success")) {
+                return ResponseEntity.ok(result);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+            }
+        } catch (Exception e) {
+            Map<String, Object> errorBody = new HashMap<>();
+            errorBody.put("success", false);
+            errorBody.put("message", "删除批次兑换码失败: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorBody);
+        }
+    }
+    
+    /**
+     * 获取所有批次
+     * @return 所有批次列表
+     */
+    @GetMapping("/batches")
+    public ResponseEntity<?> getAllBatches() {
+        try {
+            List<String> batches = exchangeCodeService.getAllBatches();
+            
+            Map<String, Object> successBody = new HashMap<>();
+            successBody.put("success", true);
+            successBody.put("count", batches.size());
+            successBody.put("batches", batches);
+            return ResponseEntity.ok(successBody);
+        } catch (Exception e) {
+            Map<String, Object> errorBody = new HashMap<>();
+            errorBody.put("success", false);
+            errorBody.put("message", "获取所有批次失败: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorBody);
+        }
+    }
 }

@@ -160,4 +160,34 @@ public class ExchangeCodeServiceImpl implements ExchangeCodeService {
     public List<ExchangeCode> getExchangeCodesByBatch(String batch) {
         return exchangeCodeMapper.getExchangeCodesByBatch(batch);
     }
+    
+    @Transactional
+    @Override
+    public Map<String, Object> deleteExchangeCodesByBatch(String batch) {
+        Map<String, Object> result = new HashMap<>();
+        
+        // 验证批次是否存在
+        List<ExchangeCode> exchangeCodes = exchangeCodeMapper.getExchangeCodesByBatch(batch);
+        if (exchangeCodes == null || exchangeCodes.isEmpty()) {
+            result.put("success", false);
+            result.put("message", "该批次不存在或没有兑换码");
+            result.put("batch", batch);
+            return result;
+        }
+        
+        // 删除该批次的所有兑换码
+        int deletedCount = exchangeCodeMapper.deleteExchangeCodesByBatch(batch);
+        
+        // 返回结果
+        result.put("success", true);
+        result.put("message", "批次兑换码删除成功");
+        result.put("batch", batch);
+        result.put("deletedCount", deletedCount);
+        return result;
+    }
+    
+    @Override
+    public List<String> getAllBatches() {
+        return exchangeCodeMapper.getAllBatches();
+    }
 }

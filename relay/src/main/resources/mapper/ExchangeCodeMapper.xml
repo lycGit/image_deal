@@ -68,4 +68,18 @@
         WHERE status = 1 AND remaining_points > 0
         ORDER BY obtained_time DESC
     </select>
+    
+    <!-- 删除指定批次的所有兑换码 -->
+    <delete id="deleteExchangeCodesByBatch" parameterType="java.lang.String">
+        DELETE FROM exchange_code
+        WHERE batch = #{batch}
+    </delete>
+    
+    <!-- 获取所有批次 -->
+    <select id="getAllBatches" resultType="java.lang.String">
+        SELECT DISTINCT batch, MIN(create_time) as createTime
+        FROM exchange_code
+        GROUP BY batch
+        ORDER BY createTime DESC
+    </select>
 </mapper>

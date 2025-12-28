@@ -49,4 +49,17 @@ public interface ExchangeCodeService {
      * @return 兑换码列表
      */
     List<ExchangeCode> getExchangeCodesByBatch(String batch);
+    
+    /**
+     * 删除指定批次的所有兑换码
+     * @param batch 批次号
+     * @return 删除结果
+     */
+    Map<String, Object> deleteExchangeCodesByBatch(String batch);
+    
+    /**
+     * 获取所有批次
+     * @return 所有批次列表
+     */
+    List<String> getAllBatches();
 }

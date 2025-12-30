@@ -1,0 +1,2 @@
+ALTER TABLE exchange_code
+ADD COLUMN valid_days INT NOT NULL DEFAULT 3 COMMENT '有效期天数';

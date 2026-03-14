@@ -1,4 +1,4 @@
-package com.lyc.ai.Config;
+package com.lyc.ai.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

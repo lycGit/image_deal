@@ -1,6 +1,6 @@
 package com.lyc.ai.controller;
 
-import com.lyc.ai.Config.FileStorageConfig;
+import com.lyc.ai.config.FileStorageConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.lyc.ai.Config;
+package com.lyc.ai.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 @Configuration

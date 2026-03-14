@@ -190,4 +190,51 @@ public class ExchangeCodeServiceImpl implements ExchangeCodeService {
     public List<String> getAllBatches() {
         return exchangeCodeMapper.getAllBatches();
     }
+    
+    @Transactional
+    @Override
+    public List<ExchangeCode> getExchangeCodes(int count) {
+        // 获取指定数量的未获取兑换码
+        List<ExchangeCode> unobtainedCodes = exchangeCodeMapper.getUnobtainedExchangeCodesWithLimit(count);
+        
+        if (unobtainedCodes.isEmpty()) {
+            return unobtainedCodes;
+        }
+        
+        // 标记所有兑换码为已获取
+        for (ExchangeCode exchangeCode : unobtainedCodes) {
+            exchangeCodeMapper.markCodeAsObtained(exchangeCode.getCode());
+            // 更新内存中的对象状态
+            exchangeCode.setStatus(1); // 1: 已获取
+            exchangeCode.setObtainedTime(new Date());
+        }
+        
+        return unobtainedCodes;
+    }
+    
+    @Transactional
+    @Override
+    public List<ExchangeCode> getExchangeCodesByBatch(String batch, int count) {
+        // 获取指定批次的指定数量未获取兑换码
+        List<ExchangeCode> unobtainedCodes = exchangeCodeMapper.getUnobtainedExchangeCodesByBatchWithLimit(batch, count);
+        
+        if (unobtainedCodes.isEmpty()) {
+            return unobtainedCodes;
+        }
+        
+        // 标记所有兑换码为已获取
+        for (ExchangeCode exchangeCode : unobtainedCodes) {
+            exchangeCodeMapper.markCodeAsObtained(exchangeCode.getCode());
+            // 更新内存中的对象状态
+            exchangeCode.setStatus(1); // 1: 已获取
+            exchangeCode.setObtainedTime(new Date());
+        }
+        
+        return unobtainedCodes;
+    }
+    
+    @Override
+    public int countUnobtainedExchangeCodesByBatch(String batch) {
+        return exchangeCodeMapper.countUnobtainedExchangeCodesByBatch(batch);
+    }
 }

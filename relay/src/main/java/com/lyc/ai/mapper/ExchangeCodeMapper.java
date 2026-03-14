@@ -35,4 +35,13 @@ public interface ExchangeCodeMapper {
     
     // 获取所有批次
     List<String> getAllBatches();
+    
+    // 获取指定数量的未获取兑换码
+    List<ExchangeCode> getUnobtainedExchangeCodesWithLimit(@Param("limit") int limit);
+    
+    // 获取指定批次的指定数量未获取兑换码
+    List<ExchangeCode> getUnobtainedExchangeCodesByBatchWithLimit(@Param("batch") String batch, @Param("limit") int limit);
+    
+    // 获取指定批次未使用兑换码的数量
+    int countUnobtainedExchangeCodesByBatch(@Param("batch") String batch);
 }

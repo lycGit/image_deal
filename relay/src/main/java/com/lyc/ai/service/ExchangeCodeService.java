@@ -62,4 +62,26 @@ public interface ExchangeCodeService {
      * @return 所有批次列表
      */
     List<String> getAllBatches();
+    
+    /**
+     * 获取指定数量的未使用兑换码
+     * @param count 要获取的数量
+     * @return 兑换码列表
+     */
+    List<ExchangeCode> getExchangeCodes(int count);
+    
+    /**
+     * 获取指定批次的指定数量未使用兑换码
+     * @param batch 批次号
+     * @param count 要获取的数量
+     * @return 兑换码列表
+     */
+    List<ExchangeCode> getExchangeCodesByBatch(String batch, int count);
+    
+    /**
+     * 查询指定批次未使用兑换码的剩余数量
+     * @param batch 批次号
+     * @return 未使用兑换码的数量
+     */
+    int countUnobtainedExchangeCodesByBatch(String batch);
 }

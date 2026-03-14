@@ -82,4 +82,31 @@
         GROUP BY batch
         ORDER BY createTime DESC
     </select>
+    
+    <!-- 获取指定数量的未获取兑换码 -->
+    <select id="getUnobtainedExchangeCodesWithLimit" parameterType="int" resultType="com.lyc.ai.pojo.entity.ExchangeCode">
+        SELECT id, code, batch, total_points AS totalPoints, remaining_points AS remainingPoints, 
+               status, create_time AS createTime, obtained_time AS obtainedTime, valid_days AS validDays
+        FROM exchange_code
+        WHERE status = 0
+        ORDER BY create_time ASC
+        LIMIT #{limit}
+    </select>
+    
+    <!-- 获取指定批次的指定数量未获取兑换码 -->
+    <select id="getUnobtainedExchangeCodesByBatchWithLimit" resultType="com.lyc.ai.pojo.entity.ExchangeCode">
+        SELECT id, code, batch, total_points AS totalPoints, remaining_points AS remainingPoints, 
+               status, create_time AS createTime, obtained_time AS obtainedTime, valid_days AS validDays
+        FROM exchange_code
+        WHERE status = 0 AND batch = #{batch}
+        ORDER BY id ASC
+        LIMIT #{limit}
+    </select>
+    
+    <!-- 获取指定批次未使用兑换码的数量 -->
+    <select id="countUnobtainedExchangeCodesByBatch" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM exchange_code
+        WHERE status = 0 AND batch = #{batch}
+    </select>
 </mapper>

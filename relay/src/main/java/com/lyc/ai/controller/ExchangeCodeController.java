@@ -48,45 +48,6 @@ public class ExchangeCodeController {
     }
 
     /**
-     * 获取一个未使用的兑换码，可以指定批次
-     * @param batch 批次号（可选）
-     * @return 兑换码信息
-     */
-    @GetMapping({"/get", "/get/{batch}"})
-    public ResponseEntity<?> getExchangeCode(@PathVariable(required = false) String batch) {
-        try {
-            ExchangeCode exchangeCode;
-            
-            if (batch != null && !batch.isEmpty()) {
-                // 获取指定批次的未使用兑换码
-                exchangeCode = exchangeCodeService.getExchangeCodeByBatch(batch);
-                if (exchangeCode == null) {
-                    Map<String, Object> errorBody = new HashMap<>();
-                    errorBody.put("success", false);
-                    errorBody.put("message", "该批次没有可用的兑换码");
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
-                }
-            } else {
-                // 获取任意未使用的兑换码
-                exchangeCode = exchangeCodeService.getExchangeCode();
-                if (exchangeCode == null) {
-                    Map<String, Object> errorBody = new HashMap<>();
-                    errorBody.put("success", false);
-                    errorBody.put("message", "没有可用的兑换码");
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
-                }
-            }
-            
-            return ResponseEntity.ok(exchangeCode);
-        } catch (Exception e) {
-            Map<String, Object> errorBody = new HashMap<>();
-            errorBody.put("success", false);
-            errorBody.put("message", "获取兑换码失败: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorBody);
-        }
-    }
-
-    /**
      * 消费兑换码积分
      * @param params 包含code(兑换码)和points(要消费的积分)参数
      * @return 消费结果
@@ -205,6 +166,120 @@ public class ExchangeCodeController {
             Map<String, Object> errorBody = new HashMap<>();
             errorBody.put("success", false);
             errorBody.put("message", "获取所有批次失败: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorBody);
+        }
+    }
+
+    /**
+     * 获取一个未使用的兑换码，可以指定批次
+     * @param batch 批次号（可选）
+     * @return 兑换码信息
+     */
+    @GetMapping({"/get", "/get/{batch}"})
+    public ResponseEntity<?> getExchangeCode(@PathVariable(required = false) String batch) {
+        try {
+            ExchangeCode exchangeCode;
+            
+            if (batch != null && !batch.isEmpty()) {
+                // 获取指定批次的未使用兑换码
+                exchangeCode = exchangeCodeService.getExchangeCodeByBatch(batch);
+                if (exchangeCode == null) {
+                    Map<String, Object> errorBody = new HashMap<>();
+                    errorBody.put("success", false);
+                    errorBody.put("message", "该批次没有可用的兑换码");
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
+                }
+            } else {
+                // 获取任意未使用的兑换码
+                exchangeCode = exchangeCodeService.getExchangeCode();
+                if (exchangeCode == null) {
+                    Map<String, Object> errorBody = new HashMap<>();
+                    errorBody.put("success", false);
+                    errorBody.put("message", "没有可用的兑换码");
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
+                }
+            }
+            
+            return ResponseEntity.ok(exchangeCode);
+        } catch (Exception e) {
+            Map<String, Object> errorBody = new HashMap<>();
+            errorBody.put("success", false);
+            errorBody.put("message", "获取兑换码失败: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorBody);
+        }
+    }
+    
+    /**
+     * 获取指定数量的未使用兑换码
+     * @param params 包含count(数量)参数，可选batch(批次号)参数
+     * @return 兑换码列表
+     */
+    @PostMapping("/get-batch")
+    public ResponseEntity<?> getExchangeCodesBatch(@RequestBody Map<String, Object> params) {
+        try {
+            int count = (int) params.get("count");
+            String batch = (String) params.get("batch");
+            
+            if (count <= 0) {
+                Map<String, Object> errorBody = new HashMap<>();
+                errorBody.put("success", false);
+                errorBody.put("message", "数量必须大于0");
+                return ResponseEntity.badRequest().body(errorBody);
+            }
+            
+            List<ExchangeCode> exchangeCodes;
+            if (batch != null && !batch.isEmpty()) {
+                // 获取指定批次的指定数量未使用兑换码
+                exchangeCodes = exchangeCodeService.getExchangeCodesByBatch(batch, count);
+                if (exchangeCodes.isEmpty()) {
+                    Map<String, Object> errorBody = new HashMap<>();
+                    errorBody.put("success", false);
+                    errorBody.put("message", "该批次没有足够的可用兑换码");
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
+                }
+            } else {
+                // 获取任意指定数量的未使用兑换码
+                exchangeCodes = exchangeCodeService.getExchangeCodes(count);
+                if (exchangeCodes.isEmpty()) {
+                    Map<String, Object> errorBody = new HashMap<>();
+                    errorBody.put("success", false);
+                    errorBody.put("message", "没有足够的可用兑换码");
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
+                }
+            }
+            
+            Map<String, Object> successBody = new HashMap<>();
+            successBody.put("success", true);
+            successBody.put("count", exchangeCodes.size());
+            successBody.put("codes", exchangeCodes);
+            return ResponseEntity.ok(successBody);
+        } catch (Exception e) {
+            Map<String, Object> errorBody = new HashMap<>();
+            errorBody.put("success", false);
+            errorBody.put("message", "获取兑换码失败: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorBody);
+        }
+    }
+    
+    /**
+     * 查询指定批次未使用兑换码的剩余数量
+     * @param batch 批次号
+     * @return 未使用兑换码的数量
+     */
+    @GetMapping("/count/{batch}")
+    public ResponseEntity<?> countUnobtainedExchangeCodesByBatch(@PathVariable String batch) {
+        try {
+            int count = exchangeCodeService.countUnobtainedExchangeCodesByBatch(batch);
+            
+            Map<String, Object> successBody = new HashMap<>();
+            successBody.put("success", true);
+            successBody.put("batch", batch);
+            successBody.put("count", count);
+            return ResponseEntity.ok(successBody);
+        } catch (Exception e) {
+            Map<String, Object> errorBody = new HashMap<>();
+            errorBody.put("success", false);
+            errorBody.put("message", "查询未使用兑换码数量失败: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorBody);
         }
     }
